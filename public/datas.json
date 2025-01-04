@@ -1,0 +1,122 @@
+{
+    "linked_list": {
+        "types": [
+            {
+                "name": "Singly Linked List",
+                "completed": false
+            },
+            {
+                "name": "Doubly Linked List",
+                "completed": false
+            },
+            {
+                "name": "Circular Linked List",
+                "completed": false
+            }
+        ],
+        "core_operations": [
+            {
+                "name": "Add Node",
+                "completed": false
+            },
+            {
+                "name": "Insert Node",
+                "completed": false
+            },
+            {
+                "name": "Remove Node",
+                "completed": false
+            },
+            {
+                "name": "Remove After Target",
+                "completed": false
+            },
+            {
+                "name": "Remove Before Target",
+                "completed": false
+            },
+            {
+                "name": "Reverse Linked List",
+                "completed": false
+            },
+            {
+                "name": "Detect Loop/Cycle in Linked List",
+                "completed": false
+            },
+            {
+                "name": "Remove Duplicates",
+                "completed": false
+            },
+            {
+                "name": "Find Middle Node",
+                "completed": false
+            },
+            {
+                "name": "Find Nth Node from End",
+                "completed": false
+            },
+            {
+                "name": "Split Linked List",
+                "completed": false
+            },
+            {
+                "name": "Rotate Linked List (Left or Right)",
+                "completed": false
+            },
+            {
+                "name": "Handle Odd and Even Nodes",
+                "completed": false
+            },
+            {
+                "name": "Merge Sorted Linked Lists",
+                "completed": false
+            },
+            {
+                "name": "Remove Kth Node from Back",
+                "completed": false
+            },
+            {
+                "name": "Add Kth Node from Back",
+                "completed": false
+            }
+        ],
+        "special_implementations": [
+            {
+                "name": "Stack Using Linked List",
+                "completed": false
+            },
+            {
+                "name": "Queue Using Linked List",
+                "completed": false
+            },
+            {
+                "name": "Priority Queue Using Linked List",
+                "completed": false
+            },
+            {
+                "name": "LRU Cache Using Linked List",
+                "completed": false
+            }
+        ],
+        "search_operations": [
+            {
+                "name": "Search for an Element",
+                "completed": false
+            },
+            {
+                "name": "Count Occurrences of an Element",
+                "completed": false
+            }
+        ],
+        "length_operations": [
+            {
+                "name": "Calculate Length Iteratively",
+                "completed": false
+            },
+            {
+                "name": "Calculate Length Recursively",
+                "completed": false
+            }
+        ]
+    }
+}
