@@ -1,0 +1,84 @@
+{
+    "LinkedList": [
+        "Add Node to LinkedList",
+        "Remove Node from LinkedList",
+        "Reverse a LinkedList",
+        "Remove K'th Node from the end of the LinkedList",
+        "Remove Odd or Even from a List",
+        "Implement Circular LinkedList",
+        "Implement Doubly LinkedList",
+        "Remove Middle Node of a LinkedList",
+        "Intersection of Two LinkedList",
+        "Merge Two Sorted LinkedList"
+    ],
+    "Sorting": [
+        "Bubble Sort",
+        "Insertion Sort",
+        "Selection Sort",
+        "Merge Sort",
+        "Quick Sort"
+    ],
+    "HashTable": [
+        "Insertion in HashTable",
+        "Deletion in HashTable",
+        "Linear Chaining in HashTable"
+    ],
+    "Stack": [
+        "Push and Pop",
+        "Stack using LinkedList",
+        "Stack using Queue"
+    ],
+    "Queue": [
+        "Enqueue and Dequeue",
+        "Queue using LinkedList",
+        "Queue using Stack"
+    ],
+    "BinaryTree": [
+        "Insert a Node in Binary Tree",
+        "Delete a Node in Binary Tree",
+        "Count the number of nodes in a Binary Tree",
+        "Count Left or Right nodes in a Binary Tree",
+        "Validate a Binary Tree",
+        "Height of a Binary Tree",
+        "Depth of a Node in Binary Tree",
+        "Traversals in Binary Tree (Inorder, Preorder, Postorder, LevelOrder)",
+        "Check if two Trees are equal",
+        "Construct Binary Tree from Preorder and Inorder Traversal"
+    ],
+    "BinarySearchTree": [
+        "Insert a Node in Binary Search Tree",
+        "Delete a Node in Binary Search Tree",
+        "Count the number of nodes in a Binary Search Tree",
+        "Count Left or Right nodes in a Binary Search Tree",
+        "Validate a Binary Search Tree",
+        "Height of a Binary Search Tree",
+        "Depth of a Node in Binary Search Tree",
+        "Traversals in Binary Search Tree (Inorder, Preorder, Postorder, LevelOrder)",
+        "K'th Smallest Node in a Binary Search Tree",
+        "Construct Binary Tree from Preorder and Inorder Traversal"
+    ],
+    "Trie": [
+        "Construct A Trie",
+        "Insert a Word into Trie",
+        "Search if Prefix exists",
+        "Auto Completion in Trie using DFS"
+    ],
+    "Heap": [
+        "Construct a Max Heap",
+        "Construct a Min Heap",
+        "Heapify Up",
+        "Heapify Down",
+        "Heap Sort"
+    ],
+    "Graph": [
+        "Construct a Graph using Adjacency List",
+        "Construct a Graph using Adjacency Matrix",
+        "DFS in a Graph",
+        "BFS in a Graph",
+        "Shortest Path in an Unweighted Graph - BFS",
+        "Shortest Path in a Weighted Graph - Dijkstra's Algorithm",
+        "Clone a Graph",
+        "Check if two Graphs are equal",
+        "Detect a Cycle in Graph"
+    ]
+}
