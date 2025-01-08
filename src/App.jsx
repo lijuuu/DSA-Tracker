@@ -88,7 +88,9 @@ const App = () => {
         paddingBottom: '8px',
       }}>
         <div>
-          <h1 style={{ fontSize: '20px', margin: 0 }}>DSA Tracker</h1>
+          <h1 style={{ fontSize: '20px', marginBottom:20 }}>DSA Tracker:  
+            <a style={{padding:'10px'}} href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Click Here</a>
+          </h1>
           <div style={{ fontSize: '14px', color: '#666' }}>
             <Trophy size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
             Streak: {streak} &nbsp; | &nbsp;
