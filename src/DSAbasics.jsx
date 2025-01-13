@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import data from "./dsa.json";
 import { Trophy, Timer, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
 
-const App = () => {
+const DSAbasics = () => {
   const [checkedTasks, setCheckedTasks] = useState({});
   const [startDate, setStartDate] = useState(null);
   const [streak, setStreak] = useState(0);
@@ -89,7 +89,8 @@ const App = () => {
       }}>
         <div>
           <h1 style={{ fontSize: '20px', marginBottom:20 }}>DSA Tracker:  
-            <a style={{padding:'10px'}} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Click Here</a>
+            <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
+            <a style={{ padding: '10px' }}  href="/blind75">Blind 75</a>
           </h1>
           <div style={{ fontSize: '14px', color: '#666' }}>
             <Trophy size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
@@ -192,4 +193,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default DSAbasics;
