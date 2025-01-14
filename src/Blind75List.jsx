@@ -33,11 +33,13 @@ const Blind75List = () => {
 
     const handleCheckboxChange = (taskId) => {
         setCheckedTasks((prevState) => {
+            const isChecked = prevState[taskId];
             const newState = {
                 ...prevState,
-                [taskId]: !prevState[taskId],
+                [taskId]: !isChecked,
             };
-            setStreak((prev) => (newState[taskId] ? prev + 1 : Math.max(0, prev - 1)));
+            const newStreak = Object.values(newState).filter(Boolean).length;
+            setStreak(newStreak);
             return newState;
         });
     };
@@ -46,11 +48,9 @@ const Blind75List = () => {
         let totalTasks = 0;
         let completedTasks = 0;
 
-        Object.entries(data).forEach(([, tasks]) => {
+        Object.values(data).forEach((tasks) => {
             totalTasks += tasks.length;
-            completedTasks += tasks.filter((task, index) =>
-                checkedTasks[`${task}-${index}`]
-            ).length;
+            completedTasks += tasks.filter((task) => checkedTasks[task.title]).length;
         });
 
         return { completed: completedTasks, total: totalTasks };
@@ -61,7 +61,7 @@ const Blind75List = () => {
     };
 
     const { completed, total } = calculateTotalProgress();
-    const percentage = (completed / total) * 100;
+    const percentage = total > 0 ? (completed / total) * 100 : 0;
 
     const getColor = (percent) => {
         const value = percent / 100;
@@ -90,7 +90,7 @@ const Blind75List = () => {
                 <div>
                     <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
                         <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
-                        <a style={{ padding: '10px' }}  href="/">DSA Basics</a>
+                        <a style={{ padding: '10px' }} href="/">DSA Basics</a>
                     </h1>
                     <div style={{ fontSize: '14px', color: '#666' }}>
                         <Trophy size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
@@ -114,8 +114,8 @@ const Blind75List = () => {
             </div>
 
             {/* Task Categories */}
-            {Object.entries(data).map(([category, tasks], index) => (
-                <div key={index} style={{ marginBottom: '12px' }}>
+            {Object.entries(data).map(([category, tasks]) => (
+                <div key={category} style={{ marginBottom: '12px' }}>
                     <div
                         style={{
                             display: 'flex',
@@ -134,9 +134,9 @@ const Blind75List = () => {
                     </div>
                     {expandedCategory === category && (
                         <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
-                            {tasks.map((task, index) => (
+                            {tasks.map((task) => (
                                 <div
-                                    key={index}
+                                    key={task.title}
                                     style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -145,21 +145,20 @@ const Blind75List = () => {
                                     }}
                                 >
                                     <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        
                                         <input
                                             type="checkbox"
-                                            checked={checkedTasks[`${task}-${index}`] || false}
-                                            onChange={() => handleCheckboxChange(`${task}-${index}`)}
+                                            checked={checkedTasks[task.title] || false}
+                                            onChange={() => handleCheckboxChange(task.title)}
                                             style={{ cursor: 'pointer' }}
                                         />
                                         <span
                                             style={{
-                                                textDecoration: checkedTasks[`${task}-${index}`] ? 'line-through' : 'none',
-                                                color: checkedTasks[`${task}-${index}`] ? '#999' : '#000',
+                                                textDecoration: checkedTasks[task.title] ? 'line-through' : 'none',
+                                                color: checkedTasks[task.title] ? '#999' : '#000',
                                                 fontSize: '14px',
                                             }}
                                         >
-                                            <a target='_blank' href={ task.link}>{task.title}</a>
+                                            <a target='_blank' rel='noopener noreferrer' href={task.link}>{task.title}</a>
                                         </span>
                                     </label>
                                 </div>
