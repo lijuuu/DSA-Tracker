@@ -90,6 +90,7 @@ const DSAbasics = () => {
         <div>
           <h1 style={{ fontSize: '20px', marginBottom:20 }}>DSA Tracker:  
             <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
+            <a style={{ padding: '10px' }} target='_blank' href="https://xcode.lijuu.me/">Compiler</a>
             <a style={{ padding: '10px' }}  href="/blind75">Blind 75</a>
           </h1>
           <div style={{ fontSize: '14px', color: '#666' }}>

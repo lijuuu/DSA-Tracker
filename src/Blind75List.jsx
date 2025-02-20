@@ -90,6 +90,7 @@ const Blind75List = () => {
                 <div>
                     <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
                         <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
+                        <a style={{ padding: '10px' }} target='_blank' href="https://xcode.lijuu.me/">Compiler</a>
                         <a style={{ padding: '10px' }} href="/">DSA Basics</a>
                     </h1>
                     <div style={{ fontSize: '14px', color: '#666' }}>
@@ -192,5 +193,6 @@ const Blind75List = () => {
         </div>
     );
 };
+
 
 export default Blind75List;
