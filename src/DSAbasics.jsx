@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import data from "./dsa.json";
-import { Trophy, Timer, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
+import { Timer, Trash2 } from 'lucide-react';
 
 const DSAbasics = () => {
   const [checkedTasks, setCheckedTasks] = useState({});
   const [startDate, setStartDate] = useState(null);
-  const [streak, setStreak] = useState(0);
-  const [expandedCategory, setExpandedCategory] = useState(null);
 
   useEffect(() => {
     const savedCheckedTasks = localStorage.getItem('checkedTasks');
     const savedStartDate = localStorage.getItem('startDate');
-    const savedStreak = localStorage.getItem('streak');
 
     if (savedCheckedTasks) setCheckedTasks(JSON.parse(savedCheckedTasks));
     if (savedStartDate) {
@@ -20,7 +17,6 @@ const DSAbasics = () => {
     } else {
       setStartDate(new Date());
     }
-    if (savedStreak) setStreak(parseInt(savedStreak, 10));
   }, []);
 
   useEffect(() => {
@@ -28,40 +24,29 @@ const DSAbasics = () => {
     if (startDate) {
       localStorage.setItem('startDate', startDate.toISOString());
     }
-    localStorage.setItem('streak', streak.toString());
-  }, [checkedTasks, startDate, streak]);
+  }, [checkedTasks, startDate]);
 
   const handleCheckboxChange = (taskId) => {
-    setCheckedTasks((prevState) => {
-      const newState = {
-        ...prevState,
-        [taskId]: !prevState[taskId],
-      };
-      setStreak((prev) => (newState[taskId] ? prev + 1 : Math.max(0, prev - 1)));
-      return newState;
-    });
+    setCheckedTasks((prevState) => ({
+      ...prevState,
+      [taskId]: !prevState[taskId],
+    }));
   };
 
   const calculateTotalProgress = () => {
     let totalTasks = 0;
     let completedTasks = 0;
 
-    Object.entries(data).forEach(([, tasks]) => {
+    Object.entries(data).forEach(([ ,tasks]) => {
       totalTasks += tasks.length;
-      completedTasks += tasks.filter((task, index) =>
-        checkedTasks[`${task}-${index}`]
-      ).length;
+      completedTasks += tasks.filter((task, taskIndex) => checkedTasks[`${task}-${taskIndex}`]).length;
     });
 
     return { completed: completedTasks, total: totalTasks };
   };
 
-  const toggleCategory = (category) => {
-    setExpandedCategory((prev) => (prev === category ? null : category));
-  };
-
   const { completed, total } = calculateTotalProgress();
-  const percentage = (completed / total) * 100;
+  const percentage = total > 0 ? (completed / total) * 100 : 0;
 
   const getColor = (percent) => {
     const value = percent / 100;
@@ -88,14 +73,12 @@ const DSAbasics = () => {
         paddingBottom: '8px',
       }}>
         <div>
-          <h1 style={{ fontSize: '20px', marginBottom:20 }}>DSA Tracker:  
-            <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
-            <a style={{ padding: '10px' }} target='_blank' href="https://xcode.lijuu.me/">Compiler</a>
-            <a style={{ padding: '10px' }}  href="/blind75">Blind 75</a>
+          <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
+            <a style={{ padding: '10px' }} href="/additionals">Additionals</a>
+            <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
+            <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
           </h1>
           <div style={{ fontSize: '14px', color: '#666' }}>
-            <Trophy size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
-            Streak: {streak} &nbsp; | &nbsp;
             <Timer size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
             Day {getDaysElapsed()}
           </div>
@@ -115,57 +98,52 @@ const DSAbasics = () => {
       </div>
 
       {/* Task Categories */}
-      {Object.entries(data).map(([category, tasks], index) => (
-        <div key={index} style={{ marginBottom: '12px' }}>
+      {Object.entries(data).map(([category, tasks], catIndex) => (
+        <div key={catIndex} style={{ marginBottom: '12px' }}>
           <div
             style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              cursor: 'pointer',
               backgroundColor: '#f9f9f9',
               padding: '8px',
               borderRadius: '4px',
               border: '1px solid #eee',
             }}
-            onClick={() => toggleCategory(category)}
           >
             <span>{category}</span>
-            {expandedCategory === category ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </div>
-          {expandedCategory === category && (
-            <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
-              {tasks.map((task, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '4px',
-                  }}
-                >
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <input
-                      type="checkbox"
-                      checked={checkedTasks[`${task}-${index}`] || false}
-                      onChange={() => handleCheckboxChange(`${task}-${index}`)}
-                      style={{ cursor: 'pointer' }}
-                    />
-                    <span
-                      style={{
-                        textDecoration: checkedTasks[`${task}-${index}`] ? 'line-through' : 'none',
-                        color: checkedTasks[`${task}-${index}`] ? '#999' : '#000',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {task}
-                    </span>
-                  </label>
-                </div>
-              ))}
-            </div>
-          )}
+          <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
+            {tasks.map((task, taskIndex) => (
+              <div
+                key={taskIndex}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '4px',
+                }}
+              >
+                <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <input
+                    type="checkbox"
+                    checked={checkedTasks[`${task}-${taskIndex}`] || false}
+                    onChange={() => handleCheckboxChange(`${task}-${taskIndex}`)}
+                    style={{ cursor: 'pointer' }}
+                  />
+                  <span
+                    style={{
+                      textDecoration: checkedTasks[`${task}-${taskIndex}`] ? 'line-through' : 'none',
+                      color: checkedTasks[`${task}-${taskIndex}`] ? '#999' : '#000',
+                      fontSize: '14px',
+                    }}
+                  >
+                    {task}
+                  </span>
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
 
@@ -174,8 +152,8 @@ const DSAbasics = () => {
         <button
           onClick={() => {
             setCheckedTasks({});
-            setStreak(0);
-            localStorage.clear();
+            localStorage.removeItem('checkedTasks');
+            localStorage.removeItem('startDate');
           }}
           style={{
             padding: '8px 16px',

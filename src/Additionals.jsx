@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
-import data from "./blind75list.json";
-import { Trophy, Timer, Trash2, ChevronDown, ChevronRight } from 'lucide-react';
+import data from "./additionals.json";
+import {  Timer, Trash2 } from 'lucide-react';
 
-const Blind75List = () => {
+const Additionals = () => {
     const [checkedTasks, setCheckedTasks] = useState({});
     const [startDate, setStartDate] = useState(null);
-    const [streak, setStreak] = useState(0);
-    const [expandedCategory, setExpandedCategory] = useState(null);
 
     useEffect(() => {
         const savedCheckedTasks = localStorage.getItem('checkedTasks');
         const savedStartDate = localStorage.getItem('startDate');
-        const savedStreak = localStorage.getItem('streak');
 
         if (savedCheckedTasks) setCheckedTasks(JSON.parse(savedCheckedTasks));
         if (savedStartDate) {
@@ -20,7 +17,6 @@ const Blind75List = () => {
         } else {
             setStartDate(new Date());
         }
-        if (savedStreak) setStreak(parseInt(savedStreak, 10));
     }, []);
 
     useEffect(() => {
@@ -28,20 +24,13 @@ const Blind75List = () => {
         if (startDate) {
             localStorage.setItem('startDate', startDate.toISOString());
         }
-        localStorage.setItem('streak', streak.toString());
-    }, [checkedTasks, startDate, streak]);
+    }, [checkedTasks, startDate]);
 
     const handleCheckboxChange = (taskId) => {
-        setCheckedTasks((prevState) => {
-            const isChecked = prevState[taskId];
-            const newState = {
-                ...prevState,
-                [taskId]: !isChecked,
-            };
-            const newStreak = Object.values(newState).filter(Boolean).length;
-            setStreak(newStreak);
-            return newState;
-        });
+        setCheckedTasks((prevState) => ({
+            ...prevState,
+            [taskId]: !prevState[taskId],
+        }));
     };
 
     const calculateTotalProgress = () => {
@@ -54,10 +43,6 @@ const Blind75List = () => {
         });
 
         return { completed: completedTasks, total: totalTasks };
-    };
-
-    const toggleCategory = (category) => {
-        setExpandedCategory((prev) => (prev === category ? null : category));
     };
 
     const { completed, total } = calculateTotalProgress();
@@ -89,13 +74,11 @@ const Blind75List = () => {
             }}>
                 <div>
                     <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
-                        <a style={{ padding: '10px' }} target='_blank' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
-                        <a style={{ padding: '10px' }} target='_blank' href="https://xcode.lijuu.me/">Compiler</a>
-                        <a style={{ padding: '10px' }} href="/">DSA Basics</a>
+                        <a style={{ padding: '10px' }} href="/">Basics</a>
+                        <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
+                        <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
                     </h1>
                     <div style={{ fontSize: '14px', color: '#666' }}>
-                        <Trophy size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
-                        Streak: {streak} &nbsp; | &nbsp;
                         <Timer size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
                         Day {getDaysElapsed()}
                     </div>
@@ -122,50 +105,57 @@ const Blind75List = () => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            cursor: 'pointer',
                             backgroundColor: '#f9f9f9',
                             padding: '8px',
                             borderRadius: '4px',
                             border: '1px solid #eee',
                         }}
-                        onClick={() => toggleCategory(category)}
                     >
                         <span>{category}</span>
-                        {expandedCategory === category ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                     </div>
-                    {expandedCategory === category && (
-                        <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
-                            {tasks.map((task) => (
-                                <div
-                                    key={task.title}
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
-                                        marginBottom: '4px',
-                                    }}
-                                >
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <input
-                                            type="checkbox"
-                                            checked={checkedTasks[task.title] || false}
-                                            onChange={() => handleCheckboxChange(task.title)}
-                                            style={{ cursor: 'pointer' }}
-                                        />
+                    <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
+                        {tasks.map((task) => (
+                            <div
+                                key={task.title}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                    marginBottom: '4px',
+                                }}
+                            >
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={checkedTasks[task.title] || false}
+                                        onChange={() => handleCheckboxChange(task.title)}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                    <span
+                                        style={{
+                                            textDecoration: checkedTasks[task.title] ? 'line-through' : 'none',
+                                            color: checkedTasks[task.title] ? '#999' : '#000',
+                                            fontSize: '14px',
+                                        }}
+                                    >
+                                        <a target='_blank' rel='noopener noreferrer' href={task.link}>{task.title}</a>
                                         <span
                                             style={{
-                                                textDecoration: checkedTasks[task.title] ? 'line-through' : 'none',
-                                                color: checkedTasks[task.title] ? '#999' : '#000',
-                                                fontSize: '14px',
+                                                marginLeft: '8px',
+                                                fontSize: '12px',
+                                                padding: '2px 6px',
+                                                borderRadius: '4px',
+                                                backgroundColor: task.site === 'leetcode' ? '#e6f3ff' : '#e6ffe6',
+                                                color: task.site === 'leetcode' ? '#0057d8' : '#008000',
                                             }}
                                         >
-                                            <a target='_blank' rel='noopener noreferrer' href={task.link}>{task.title}</a>
+                                            {task.site === 'leetcode' ? 'LeetCode' : 'NeetCode'}
                                         </span>
-                                    </label>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                    </span>
+                                </label>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
 
@@ -174,8 +164,8 @@ const Blind75List = () => {
                 <button
                     onClick={() => {
                         setCheckedTasks({});
-                        setStreak(0);
-                        localStorage.clear();
+                        localStorage.removeItem('checkedTasks');
+                        localStorage.removeItem('startDate');
                     }}
                     style={{
                         padding: '8px 16px',
@@ -194,5 +184,4 @@ const Blind75List = () => {
     );
 };
 
-
-export default Blind75List;
+export default Additionals;

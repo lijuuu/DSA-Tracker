@@ -9,33 +9,51 @@
         "Implement Doubly LinkedList",
         "Remove Middle Node of a LinkedList",
         "Intersection of Two LinkedList",
-        "Merge Two Sorted LinkedList"
+        "Merge Two Sorted LinkedList",
+        "Detect and Remove Cycle in LinkedList",
+        "Palindrome LinkedList",
+        "Flatten a Multilevel Linked List"
     ],
     "Sorting": [
         "Bubble Sort",
         "Insertion Sort",
         "Selection Sort",
         "Merge Sort",
-        "Quick Sort"
+        "Quick Sort",
+        "Count Inversions using Merge Sort",
+        "Bucket Sort",
+        "Radix Sort"
     ],
     "HashTable": [
         "Insertion in HashTable",
         "Deletion in HashTable",
-        "Linear Chaining in HashTable"
+        "Linear Chaining in HashTable",
+        "Quadratic Probing",
+        "Implement LRU Cache",
+        "Group Anagrams using HashMap",
+        "Top K Frequent Elements"
     ],
     "Stack": [
         "Push and Pop",
         "Stack using LinkedList",
-        "Stack using Queue"
+        "Stack using Queue",
+        "Min Stack",
+        "Balanced Parentheses Checker",
+        "Evaluate Reverse Polish Notation",
+        "Largest Rectangle in Histogram"
     ],
     "Queue": [
         "Enqueue and Dequeue",
         "Queue using LinkedList",
-        "Queue using Stack"
+        "Queue using Stack",
+        "Circular Queue",
+        "Sliding Window Maximum",
+        "Monotonic Queue Implementation"
     ],
     "BinaryTree": [
         "Insert a Node in Binary Tree",
         "Delete a Node in Binary Tree",
+        "Print the Tree",
         "Count the number of nodes in a Binary Tree",
         "Count Left or Right nodes in a Binary Tree",
         "Validate a Binary Tree",
@@ -43,11 +61,17 @@
         "Depth of a Node in Binary Tree",
         "Traversals in Binary Tree (Inorder, Preorder, Postorder, LevelOrder)",
         "Check if two Trees are equal",
-        "Construct Binary Tree from Preorder and Inorder Traversal"
+        "Construct Binary Tree from Preorder and Inorder Traversal",
+        "Lowest Common Ancestor in Binary Tree",
+        "Diameter of Binary Tree",
+        "Serialize and Deserialize Binary Tree",
+        "Convert Sorted Array to BST",
+        "Flatten Binary Tree to LinkedList"
     ],
     "BinarySearchTree": [
         "Insert a Node in Binary Search Tree",
         "Delete a Node in Binary Search Tree",
+        "Print the Tree",
         "Count the number of nodes in a Binary Search Tree",
         "Count Left or Right nodes in a Binary Search Tree",
         "Validate a Binary Search Tree",
@@ -55,20 +79,30 @@
         "Depth of a Node in Binary Search Tree",
         "Traversals in Binary Search Tree (Inorder, Preorder, Postorder, LevelOrder)",
         "K'th Smallest Node in a Binary Search Tree",
-        "Construct Binary Tree from Preorder and Inorder Traversal"
+        "Construct Binary Tree from Preorder and Inorder Traversal",
+        "Lowest Common Ancestor in BST",
+        "Inorder Successor in BST"
     ],
     "Trie": [
         "Construct A Trie",
         "Insert a Word into Trie",
         "Search if Prefix exists",
-        "Auto Completion in Trie using DFS"
+        "Auto Completion in Trie using DFS",
+        "Delete a Word from Trie",
+        "Word Search II",
+        "Count Words with Given Prefix"
     ],
     "Heap": [
         "Construct a Max Heap",
         "Construct a Min Heap",
         "Heapify Up",
         "Heapify Down",
-        "Heap Sort"
+        "Heap Sort",
+        "Kth Largest Element",
+        "Kth Smallest Element",
+        "Merge K Sorted LinkedLists",
+        "Median in a Data Stream",
+        "Top K Frequent Words"
     ],
     "Graph": [
         "Construct a Graph using Adjacency List",
@@ -79,6 +113,10 @@
         "Shortest Path in a Weighted Graph - Dijkstra's Algorithm",
         "Clone a Graph",
         "Check if two Graphs are equal",
-        "Detect a Cycle in Graph"
+        "Detect a Cycle in Graph",
+        "Union Find (Disjoint Set Union)",
+        "Number of Islands",
+        "Topological Sort",
+        "Bellman-Ford Algorithm"
     ]
 }
