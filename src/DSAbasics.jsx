@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import data from "./dsa.json";
-import { Timer, Trash2 } from 'lucide-react';
+import {  Trash2 } from 'lucide-react';
 
 const DSAbasics = () => {
   const [checkedTasks, setCheckedTasks] = useState({});
@@ -55,12 +55,6 @@ const DSAbasics = () => {
     return `rgb(${red}, ${green}, 0)`;
   };
 
-  const getDaysElapsed = () => {
-    if (!startDate) return 0;
-    const diff = new Date() - new Date(startDate);
-    return Math.floor(diff / (1000 * 60 * 60 * 24));
-  };
-
   return (
     <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '16px' }}>
       {/* Header */}
@@ -78,10 +72,7 @@ const DSAbasics = () => {
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
           </h1>
-          <div style={{ fontSize: '14px', color: '#666' }}>
-            <Timer size={16} style={{ verticalAlign: 'middle', marginRight: '4px' }} />
-            Day {getDaysElapsed()}
-          </div>
+          
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{
