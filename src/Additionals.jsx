@@ -69,7 +69,7 @@ const Additionals = () => {
             }}>
                 <div>
                     <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
-                        <a style={{ padding: '10px' }} href="/basics">Basics</a>
+                        <a style={{ padding: '10px' }} href="/">Basics</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
                     </h1>
