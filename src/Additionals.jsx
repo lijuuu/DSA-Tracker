@@ -1,30 +1,18 @@
 import { useState, useEffect } from 'react';
 import data from "./additionals.json";
-import {   Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 const Additionals = () => {
     const [checkedTasks, setCheckedTasks] = useState({});
-    const [startDate, setStartDate] = useState(null);
 
     useEffect(() => {
         const savedCheckedTasks = localStorage.getItem('checkedTasks');
-        const savedStartDate = localStorage.getItem('startDate');
-
         if (savedCheckedTasks) setCheckedTasks(JSON.parse(savedCheckedTasks));
-        if (savedStartDate) {
-            const parsedDate = new Date(savedStartDate);
-            if (!isNaN(parsedDate)) setStartDate(parsedDate);
-        } else {
-            setStartDate(new Date());
-        }
     }, []);
 
     useEffect(() => {
         localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
-        if (startDate) {
-            localStorage.setItem('startDate', startDate.toISOString());
-        }
-    }, [checkedTasks, startDate]);
+    }, [checkedTasks]);
 
     const handleCheckboxChange = (taskId) => {
         setCheckedTasks((prevState) => ({
@@ -55,6 +43,18 @@ const Additionals = () => {
         return `rgb(${red}, ${green}, 0)`;
     };
 
+    const getDifficultyColor = (difficulty) => {
+        switch (difficulty) {
+            case "Easy":
+                return "green";
+            case "Medium":
+                return "#856404"; // Darker yellow for contrast
+            case "Hard":
+                return "red";
+            default:
+                return "blue";
+        }
+    };
 
     return (
         <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '16px' }}>
@@ -69,11 +69,10 @@ const Additionals = () => {
             }}>
                 <div>
                     <h1 style={{ fontSize: '20px', marginBottom: 20 }}>DSA Tracker:
-                        <a style={{ padding: '10px' }} href="/">Basics</a>
+                        <a style={{ padding: '10px' }} href="/basics">Basics</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
                     </h1>
-                    
                 </div>
                 <div style={{ textAlign: 'right' }}>
                     <div style={{
@@ -143,6 +142,18 @@ const Additionals = () => {
                                         >
                                             {task.site === 'leetcode' ? 'LeetCode' : 'NeetCode'}
                                         </span>
+                                        <span
+                                            style={{
+                                                marginLeft: '8px',
+                                                fontSize: '12px',
+                                                padding: '2px 6px',
+                                                borderRadius: '4px',
+                                                backgroundColor: task.difficulty === 'Easy' ? '#e6ffe6' : task.difficulty === 'Medium' ? '#fff3cd' : task.difficulty === 'Hard' ? '#ffcccc' : '#e6f3ff',
+                                                color: getDifficultyColor(task.difficulty),
+                                            }}
+                                        >
+                                            {task.difficulty}
+                                        </span>
                                     </span>
                                 </label>
                             </div>
@@ -157,7 +168,6 @@ const Additionals = () => {
                     onClick={() => {
                         setCheckedTasks({});
                         localStorage.removeItem('checkedTasks');
-                        localStorage.removeItem('startDate');
                     }}
                     style={{
                         padding: '8px 16px',

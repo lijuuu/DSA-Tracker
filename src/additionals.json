@@ -541,6 +541,18 @@
             "link": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array",
             "site": "leetcode",
             "difficulty": "Medium"
+        },
+        {
+            "title": "Koko Eating Bananas",
+            "link": "https://leetcode.com/problems/koko-eating-bananas/",
+            "site": "leetcode",
+            "difficulty": "Medium"
+        },
+        {
+            "title": "Search in Rotated Sorted Array",
+            "link": "https://leetcode.com/problems/search-in-rotated-sorted-array",
+            "site": "leetcode",
+            "difficulty": "Medium"
         }
     ],
     "Backtracking": [
