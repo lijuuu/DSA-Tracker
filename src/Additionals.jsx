@@ -72,6 +72,8 @@ const Additionals = () => {
                         <a style={{ padding: '10px' }} href="/">Basics</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
+                        <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://codolio.com/">Check this out: codolio</a>
+
                     </h1>
                 </div>
                 <div style={{ textAlign: 'right' }}>

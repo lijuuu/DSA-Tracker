@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import data from "./dsa.json";
-import {  Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 
 const DSAbasics = () => {
   const [checkedTasks, setCheckedTasks] = useState({});
@@ -37,7 +37,7 @@ const DSAbasics = () => {
     let totalTasks = 0;
     let completedTasks = 0;
 
-    Object.entries(data).forEach(([ ,tasks]) => {
+    Object.entries(data).forEach(([, tasks]) => {
       totalTasks += tasks.length;
       completedTasks += tasks.filter((task, taskIndex) => checkedTasks[`${task}-${taskIndex}`]).length;
     });
@@ -71,8 +71,9 @@ const DSAbasics = () => {
             <a style={{ padding: '10px' }} href="/additionals">Additionals</a>
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
+            <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://codolio.com/">Check this out: codolio</a>
           </h1>
-          
+
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{
