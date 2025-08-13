@@ -113,10 +113,12 @@
         "Shortest Path in a Weighted Graph - Dijkstra's Algorithm",
         "Clone a Graph",
         "Check if two Graphs are equal",
-        "Detect a Cycle in Graph",
+        "Detect a Cycle in Directed Graph",
+        "Detect a Cycle in Undirected Graph",
         "Union Find (Disjoint Set Union)",
-        "Number of Islands",
+        "Flood fill",
         "Topological Sort",
-        "Bellman-Ford Algorithm"
+        "Bellman-Ford Algorithm",
+        "Minimum Spanning Tree - Prims or Kruskals"
     ]
 }
