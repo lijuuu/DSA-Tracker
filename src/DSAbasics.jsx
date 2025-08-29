@@ -6,9 +6,12 @@ const DSAbasics = () => {
   const [checkedTasks, setCheckedTasks] = useState({});
   const [startDate, setStartDate] = useState(null);
 
+  //make a unique key helper
+  const getTaskKey = (category, task, index) => `${category}-${task}-${index}`;
+
   useEffect(() => {
-    const savedCheckedTasks = localStorage.getItem('checkedTasks');
-    const savedStartDate = localStorage.getItem('startDate');
+    const savedCheckedTasks = localStorage.getItem('dsaCheckedTasks');
+    const savedStartDate = localStorage.getItem('dsaStartDate');
 
     if (savedCheckedTasks) setCheckedTasks(JSON.parse(savedCheckedTasks));
     if (savedStartDate) {
@@ -20,16 +23,16 @@ const DSAbasics = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
+    localStorage.setItem('dsaCheckedTasks', JSON.stringify(checkedTasks));
     if (startDate) {
-      localStorage.setItem('startDate', startDate.toISOString());
+      localStorage.setItem('dsaStartDate', startDate.toISOString());
     }
   }, [checkedTasks, startDate]);
 
-  const handleCheckboxChange = (taskId) => {
+  const handleCheckboxChange = (key) => {
     setCheckedTasks((prevState) => ({
       ...prevState,
-      [taskId]: !prevState[taskId],
+      [key]: !prevState[key],
     }));
   };
 
@@ -37,9 +40,9 @@ const DSAbasics = () => {
     let totalTasks = 0;
     let completedTasks = 0;
 
-    Object.entries(data).forEach(([, tasks]) => {
+    Object.entries(data).forEach(([category, tasks]) => {
       totalTasks += tasks.length;
-      completedTasks += tasks.filter((task, taskIndex) => checkedTasks[`${task}-${taskIndex}`]).length;
+      completedTasks += tasks.filter((task, i) => checkedTasks[getTaskKey(category, task, i)]).length;
     });
 
     return { completed: completedTasks, total: totalTasks };
@@ -57,7 +60,7 @@ const DSAbasics = () => {
 
   return (
     <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '16px' }}>
-      {/* Header */}
+      {/* header */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -73,7 +76,6 @@ const DSAbasics = () => {
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
             <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://codolio.com/">Check this out: codolio</a>
           </h1>
-
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{
@@ -89,9 +91,9 @@ const DSAbasics = () => {
         </div>
       </div>
 
-      {/* Task Categories */}
-      {Object.entries(data).map(([category, tasks], catIndex) => (
-        <div key={catIndex} style={{ marginBottom: '12px' }}>
+      {/* task categories */}
+      {Object.entries(data).map(([category, tasks]) => (
+        <div key={category} style={{ marginBottom: '12px' }}>
           <div
             style={{
               display: 'flex',
@@ -106,46 +108,49 @@ const DSAbasics = () => {
             <span>{category}</span>
           </div>
           <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
-            {tasks.map((task, taskIndex) => (
-              <div
-                key={taskIndex}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom: '4px',
-                }}
-              >
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <input
-                    type="checkbox"
-                    checked={checkedTasks[`${task}-${taskIndex}`] || false}
-                    onChange={() => handleCheckboxChange(`${task}-${taskIndex}`)}
-                    style={{ cursor: 'pointer' }}
-                  />
-                  <span
-                    style={{
-                      textDecoration: checkedTasks[`${task}-${taskIndex}`] ? 'line-through' : 'none',
-                      color: checkedTasks[`${task}-${taskIndex}`] ? '#999' : '#000',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {task}
-                  </span>
-                </label>
-              </div>
-            ))}
+            {tasks.map((task, i) => {
+              const key = getTaskKey(category, task, i);
+              return (
+                <div
+                  key={key}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '4px',
+                  }}
+                >
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={checkedTasks[key] || false}
+                      onChange={() => handleCheckboxChange(key)}
+                      style={{ cursor: 'pointer' }}
+                    />
+                    <span
+                      style={{
+                        textDecoration: checkedTasks[key] ? 'line-through' : 'none',
+                        color: checkedTasks[key] ? '#999' : '#000',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {task}
+                    </span>
+                  </label>
+                </div>
+              )
+            })}
           </div>
         </div>
       ))}
 
-      {/* Footer */}
+      {/* footer */}
       <div style={{ textAlign: 'center', marginTop: '16px' }}>
         <button
           onClick={() => {
             setCheckedTasks({});
-            localStorage.removeItem('checkedTasks');
-            localStorage.removeItem('startDate');
+            localStorage.removeItem('dsaCheckedTasks');
+            localStorage.removeItem('dsaStartDate');
           }}
           style={{
             padding: '8px 16px',

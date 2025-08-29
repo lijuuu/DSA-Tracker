@@ -14,10 +14,14 @@ const Additionals = () => {
         localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
     }, [checkedTasks]);
 
-    const handleCheckboxChange = (taskId) => {
+    //always use category+title as unique key
+    const getTaskKey = (title, category) => `${category}-${title}`;
+
+    const handleCheckboxChange = (title, category) => {
+        const key = getTaskKey(title, category);
         setCheckedTasks((prevState) => ({
             ...prevState,
-            [taskId]: !prevState[taskId],
+            [key]: !prevState[key],
         }));
     };
 
@@ -25,9 +29,9 @@ const Additionals = () => {
         let totalTasks = 0;
         let completedTasks = 0;
 
-        Object.values(data).forEach((tasks) => {
+        Object.entries(data).forEach(([category, tasks]) => {
             totalTasks += tasks.length;
-            completedTasks += tasks.filter((task) => checkedTasks[task.title]).length;
+            completedTasks += tasks.filter((task) => checkedTasks[getTaskKey(task.title, category)]).length;
         });
 
         return { completed: completedTasks, total: totalTasks };
@@ -48,7 +52,7 @@ const Additionals = () => {
             case "Easy":
                 return "green";
             case "Medium":
-                return "#856404"; // Darker yellow for contrast
+                return "#856404";
             case "Hard":
                 return "red";
             default:
@@ -58,7 +62,7 @@ const Additionals = () => {
 
     return (
         <div style={{ fontFamily: 'system-ui, -apple-system, sans-serif', padding: '16px' }}>
-            {/* Header */}
+            {/* header */}
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -73,7 +77,6 @@ const Additionals = () => {
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://zenxbattle.space/playground">Playground</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file">Study Materials</a>
                         <a style={{ padding: '10px' }} target='_blank' rel='noopener noreferrer' href="https://codolio.com/">Check this out: codolio</a>
-
                     </h1>
                 </div>
                 <div style={{ textAlign: 'right' }}>
@@ -90,7 +93,7 @@ const Additionals = () => {
                 </div>
             </div>
 
-            {/* Task Categories */}
+            {/* task categories */}
             {Object.entries(data).map(([category, tasks]) => (
                 <div key={category} style={{ marginBottom: '12px' }}>
                     <div
@@ -107,64 +110,67 @@ const Additionals = () => {
                         <span>{category}</span>
                     </div>
                     <div style={{ padding: '8px', backgroundColor: '#fff', borderRadius: '4px' }}>
-                        {tasks.map((task) => (
-                            <div
-                                key={task.title}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    marginBottom: '4px',
-                                }}
-                            >
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <input
-                                        type="checkbox"
-                                        checked={checkedTasks[task.title] || false}
-                                        onChange={() => handleCheckboxChange(task.title)}
-                                        style={{ cursor: 'pointer' }}
-                                    />
-                                    <span
-                                        style={{
-                                            textDecoration: checkedTasks[task.title] ? 'line-through' : 'none',
-                                            color: checkedTasks[task.title] ? '#999' : '#000',
-                                            fontSize: '14px',
-                                        }}
-                                    >
-                                        <a target='_blank' rel='noopener noreferrer' href={task.link}>{task.title}</a>
+                        {tasks.map((task) => {
+                            const key = getTaskKey(task.title, category);
+                            return (
+                                <div
+                                    key={key}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        marginBottom: '4px',
+                                    }}
+                                >
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <input
+                                            type="checkbox"
+                                            checked={checkedTasks[key] || false}
+                                            onChange={() => handleCheckboxChange(task.title, category)}
+                                            style={{ cursor: 'pointer' }}
+                                        />
                                         <span
                                             style={{
-                                                marginLeft: '8px',
-                                                fontSize: '12px',
-                                                padding: '2px 6px',
-                                                borderRadius: '4px',
-                                                backgroundColor: task.site === 'leetcode' ? '#e6f3ff' : '#e6ffe6',
-                                                color: task.site === 'leetcode' ? '#0057d8' : '#008000',
+                                                textDecoration: checkedTasks[key] ? 'line-through' : 'none',
+                                                color: checkedTasks[key] ? '#999' : '#000',
+                                                fontSize: '14px',
                                             }}
                                         >
-                                            {task.site === 'leetcode' ? 'LeetCode' : 'NeetCode'}
+                                            <a target='_blank' rel='noopener noreferrer' href={task.link}>{task.title}</a>
+                                            <span
+                                                style={{
+                                                    marginLeft: '8px',
+                                                    fontSize: '12px',
+                                                    padding: '2px 6px',
+                                                    borderRadius: '4px',
+                                                    backgroundColor: task.site === 'leetcode' ? '#e6f3ff' : '#e6ffe6',
+                                                    color: task.site === 'leetcode' ? '#0057d8' : '#008000',
+                                                }}
+                                            >
+                                                {task.site === 'leetcode' ? 'LeetCode' : 'NeetCode'}
+                                            </span>
+                                            <span
+                                                style={{
+                                                    marginLeft: '8px',
+                                                    fontSize: '12px',
+                                                    padding: '2px 6px',
+                                                    borderRadius: '4px',
+                                                    backgroundColor: task.difficulty === 'Easy' ? '#e6ffe6' : task.difficulty === 'Medium' ? '#fff3cd' : task.difficulty === 'Hard' ? '#ffcccc' : '#e6f3ff',
+                                                    color: getDifficultyColor(task.difficulty),
+                                                }}
+                                            >
+                                                {task.difficulty}
+                                            </span>
                                         </span>
-                                        <span
-                                            style={{
-                                                marginLeft: '8px',
-                                                fontSize: '12px',
-                                                padding: '2px 6px',
-                                                borderRadius: '4px',
-                                                backgroundColor: task.difficulty === 'Easy' ? '#e6ffe6' : task.difficulty === 'Medium' ? '#fff3cd' : task.difficulty === 'Hard' ? '#ffcccc' : '#e6f3ff',
-                                                color: getDifficultyColor(task.difficulty),
-                                            }}
-                                        >
-                                            {task.difficulty}
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        ))}
+                                    </label>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             ))}
 
-            {/* Footer */}
+            {/* footer */}
             <div style={{ textAlign: 'center', marginTop: '16px' }}>
                 <button
                     onClick={() => {
