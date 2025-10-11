@@ -40,7 +40,11 @@
         "Min Stack",
         "Balanced Parentheses Checker",
         "Evaluate Reverse Polish Notation",
-        "Largest Rectangle in Histogram"
+        "Largest Rectangle in Histogram",
+        "Remove the Middle Element from a Stack",
+        "Sort a Stack Using an Auxiliary Stack",
+        "Create a Text Editor with Undo and Redo Operations Using Stacks",
+        
     ],
     "Queue": [
         "Enqueue and Dequeue",
@@ -48,7 +52,8 @@
         "Queue using Stack",
         "Circular Queue",
         "Sliding Window Maximum",
-        "Monotonic Queue Implementation"
+        "Monotonic Queue Implementation",
+        
     ],
     "BinaryTree": [
         "Insert a Node in Binary Tree",
