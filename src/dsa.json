@@ -43,7 +43,7 @@
         "Largest Rectangle in Histogram",
         "Remove the Middle Element from a Stack",
         "Sort a Stack Using an Auxiliary Stack",
-        "Create a Text Editor with Undo and Redo Operations Using Stacks",
+        "Create a Text Editor with Undo and Redo Operations Using Stacks"
         
     ],
     "Queue": [
@@ -52,7 +52,7 @@
         "Queue using Stack",
         "Circular Queue",
         "Sliding Window Maximum",
-        "Monotonic Queue Implementation",
+        "Monotonic Queue Implementation"
         
     ],
     "BinaryTree": [
